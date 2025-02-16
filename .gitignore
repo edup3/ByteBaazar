@@ -1,0 +1,3 @@
+db_dev.sqlite3
+settings_dev.py
+*pyc
