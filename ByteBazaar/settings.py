@@ -128,3 +128,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Eduardo Piñeros
 # Override Auth user model
 AUTH_USER_MODEL = "store.Customer"
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
