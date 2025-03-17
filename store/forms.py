@@ -11,10 +11,11 @@ class RegisterForm(UserCreationForm):
         fields = ['username', 'email', 'phone',
                   'address', 'password1', 'password2']
 
-    def clean_phone_number(self):
-        phone_number = self.cleaned_data.get('phone_number')
-
-        phone_number = ''.join(filter(str.isdigit, phone_number))
+    def clean_phone(self):
+        phone_number = self.cleaned_data.get('phone')
+        if not phone_number.isnumeric():
+            raise forms.ValidationError(
+                'El número de teléfono debe ser numerico')
 
         if len(phone_number) < 10 or len(phone_number) > 15:
             raise forms.ValidationError(
