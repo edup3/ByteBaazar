@@ -5,6 +5,11 @@ Store
 {% endblock %}
 {% block content %}
 <h2>Store</h2>
+<!-- Search bar implementation -->
+<form method="GET" action="{% url 'store' %}">
+  <input type="text" name="product" placeholder="Buscar productos..." value="{{ request.GET.product }}">
+  <button type="submit">Buscar</button>
+</form>
 <div class="products-container">
 {% for product in products %}
   <div class="card" style="width: 18rem; margin: 2rem;">
