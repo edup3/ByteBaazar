@@ -4,7 +4,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView
-from .forms import RegisterForm
+from django.db.models import Avg
+from .forms import RegisterForm, ReviewForm
 from .models import Product, Customer, Review
 
 # Create your views here.
@@ -36,21 +37,42 @@ class StorePageView(LoginRequiredMixin, ListView):
     template_name = 'store/items.html'
     model = Product
     context_object_name = 'products'
+# Search bar implementation
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('product')
+        if search_query:
+            return queryset.filter(name__icontains=search_query)
+        return queryset
 
 
 class ProductPageView(DetailView):
     model = Product
     template_name = 'store/product.html'
+# Average Rating Implementation
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        avg = super().get_queryset().aggregate(Avg('reviews__rating', default=0))
+        context.update({
+            'average_rating': round(avg.get('reviews__rating__avg'), 2)
+        })
+        print(context)
+        return context
 
 
 class CreateReviewView(LoginRequiredMixin, CreateView):
     model = Review
     template_name = 'store/review_form.html'
+    form_class = ReviewForm
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.product = Product.objects.get(pk=self.kwargs['pk'])
+        print(self.kwargs)
+        form.instance.customer = self.request.user
+        form.instance.product = Product.objects.get(
+            pk=self.kwargs['product_pk'])
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('product_detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('product', kwargs={'pk': self.kwargs['product_pk']})

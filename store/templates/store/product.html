@@ -9,6 +9,8 @@
         <img src="{{product.image.url}}" class="card-img-top product-image" alt="{{product.name}}">
         <div class="card-body product-body">
           <h5 class="card-title">{{product.name}}</h5>
+          <!-- Average Rating Implementation-->
+          <p>Rating: {{average_rating}}</p>
           <h6 class="card-subtitle">${{product.price}}</h6>
           <p class="card-text">{{product.description}}</p>
           <ul class="list-group list-group-flush reviews">
@@ -28,7 +30,7 @@
         </ul>
         <div class="btn-bar">    
             <a href="#" class="btn btn-primary" id="cart-btn">Agregar al carrito</a>
-            <a href="#" class="btn btn-secondary" id="cart-btn">Dejar una review</a>
+            <a href="{% url 'add_review' product.id %}" class="btn btn-secondary" id="cart-btn">Dejar una review</a>
         </div>
         </div>
       </div>
