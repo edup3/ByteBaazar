@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer
+from .models import Customer, Review
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -21,3 +21,13 @@ class RegisterForm(UserCreationForm):
                 'El número de teléfono debe tener entre 10 y 15 dígitos.')
 
         return phone_number
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+            'comment': forms.Textarea(attrs={'rows': 3}),
+        }

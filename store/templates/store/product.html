@@ -4,5 +4,35 @@
 {{product.name}}
 {% endblock %}
 {% block content %}
-<h2>Product View</h2>
+<div class="product-container">
+    <div class="card product-card">
+        <img src="{{product.image.url}}" class="card-img-top product-image" alt="{{product.name}}">
+        <div class="card-body product-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <!-- Average Rating Implementation-->
+          <p>Rating: {{average_rating}}</p>
+          <h6 class="card-subtitle">${{product.price}}</h6>
+          <p class="card-text">{{product.description}}</p>
+          <ul class="list-group list-group-flush reviews">
+          {% for review in product.reviews.all %}
+            <li class="list-group-item">
+                <!-- Review Card -->
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{review.customer.username}}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Rating: {{review.rating}}</h6>
+                      <p class="card-text comment">{{review.comment}}</p>
+                      <p class="mb-2 text-body-secondary">Posted: {{review.created_at}}</p>
+                    </div>
+                  </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="btn-bar">    
+            <a href="#" class="btn btn-primary" id="cart-btn">Agregar al carrito</a>
+            <a href="{% url 'add_review' product.id %}" class="btn btn-secondary" id="cart-btn">Dejar una review</a>
+        </div>
+        </div>
+      </div>
+</div>
 {% endblock %}

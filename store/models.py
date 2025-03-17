@@ -36,12 +36,12 @@ class Review(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="reviews")
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 5)])
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.customer.user.username} - {self.product.name} ({self.rating})"
+        return f"{self.customer.username} - {self.product.name} ({self.rating})"
 
 
 class Order(models.Model):
