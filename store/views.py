@@ -54,11 +54,12 @@ class ProductPageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        avg = super().get_queryset().aggregate(Avg('reviews__rating', default=0))
+        queryset = self.get_object()
+        reviews = queryset.reviews
+        avg = reviews.aggregate(Avg('rating', default=0))
         context.update({
-            'average_rating': round(avg.get('reviews__rating__avg'), 2)
+            'average_rating': avg.get('rating__avg')
         })
-        print(context)
         return context
 
 
