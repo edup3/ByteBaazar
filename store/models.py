@@ -56,7 +56,7 @@ class Order(models.Model):
     ], default="pending")
 
     def __str__(self):
-        return f"Orden {self.id} - {self.customer.user.username}"
+        return f"Orden {self.id} - {self.customer.username}"
 
 
 class OrderItem(models.Model):
