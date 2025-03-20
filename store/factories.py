@@ -1,5 +1,5 @@
 import factory
-from .models import Product
+from .models import Product, Category
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -9,3 +9,4 @@ class ProductFactory(factory.django.DjangoModelFactory):
     price = factory.Faker('random_int', min=200, max=9000)
     description = factory.Faker('text')
     stock = factory.Faker('random_int', min=1, max=100)
+    category = factory.Iterator(Category.objects.all())
