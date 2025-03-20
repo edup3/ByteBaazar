@@ -7,5 +7,5 @@ class ProductFactory(factory.django.DjangoModelFactory):
         model = Product
     name = factory.Faker('company')
     price = factory.Faker('random_int', min=200, max=9000)
-    description = factory.Faker('sentence')
+    description = factory.Faker('text')
     stock = factory.Faker('random_int', min=1, max=100)
