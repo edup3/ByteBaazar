@@ -12,7 +12,7 @@ body{
     max-height: max-content;
 }
 .products-container{
-    width: 70%;
+    width: 90%;
     justify-self: center;
     display: flex;
     flex-wrap: wrap;

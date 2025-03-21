@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView
 from django.db.models import Avg
 from .forms import RegisterForm, ReviewForm
-from .models import Product, Customer, Review
+from .models import Product, Customer, Review, Category
 
 # Create your views here.
 
@@ -37,14 +37,22 @@ class StorePageView(LoginRequiredMixin, ListView):
     template_name = 'store/items.html'
     model = Product
     context_object_name = 'products'
-# Search bar implementation
 
     def get_queryset(self):
+        # Search bar implementation and category filter implementation
         queryset = super().get_queryset()
         search_query = self.request.GET.get('product')
-        if search_query:
-            return queryset.filter(name__icontains=search_query)
+        filter_query = self.request.GET.get('category')
+        if search_query or filter_query:
+            return queryset.filter(name__icontains=search_query, category__name__icontains=filter_query)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all()
+        context["selected_category"] = self.request.GET.get(
+            "category", "")
+        return context
 
 
 class ProductPageView(DetailView):
