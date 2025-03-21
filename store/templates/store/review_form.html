@@ -1,5 +1,7 @@
 {% extends 'store/base.html' %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'store/form.css' %}">
 <h2>Add a review</h2>
 <form method="POST">
     {% csrf_token %}

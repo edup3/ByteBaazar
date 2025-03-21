@@ -1,18 +1,24 @@
 <!-- Eduardo Piñeros -->
 {% extends 'store/base.html' %}
+{% load static %}
 {% block title %} 
 {{product.name}}
 {% endblock %}
 {% block content %}
 <div class="product-container">
     <div class="card product-card">
+        {% if product.image %}
         <img src="{{product.image.url}}" class="card-img-top product-image" alt="{{product.name}}">
+        {% else %}
+        <img src="{% static 'store/not-found.jpg' %}" class="card-img-top product-image" alt="{{product.name}}">
+        {% endif %}
         <div class="card-body product-body">
           <h5 class="card-title">{{product.name}}</h5>
           <!-- Average Rating Implementation-->
           <p>Rating: {{average_rating}}</p>
           <h6 class="card-subtitle">${{product.price}}</h6>
           <p class="card-text">{{product.description}}</p>
+          <h6 class="card-subtitle">Reviews:</h6>
           <ul class="list-group list-group-flush reviews">
           {% for review in product.reviews.all %}
             <li class="list-group-item">

@@ -1,0 +1,64 @@
+/* styles.css */
+
+/* Estilos generales del formulario */
+form {
+    max-width: 500px;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de los campos */
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s ease-in-out;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilos del botón */
+form button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+/* Estilos de los mensajes de error */
+form .errorlist {
+    color: red;
+    font-size: 14px;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
+/* Centrar el formulario en la página */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f8f9fa;
+    padding: 20px;
+}
