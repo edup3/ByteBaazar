@@ -4,26 +4,27 @@
 Store
 {% endblock %}
 {% block content %}
-<h2>Store</h2>
 <!-- Search bar implementation -->
 <form method="GET" action="{% url 'store' %}">
-  <input type="text" name="product" placeholder="Buscar productos..." value="{{ request.GET.product }}">
-  <!-- Category filter implementation -->
-  <select name="category" id="category">
-    <option value="">Todas</option>
-    {% for category in categories %}
-    {% if selected_category == category.name %}
-    <option value="{{category.name}}" selected>{{category.name}}</option>
-    {% else %}
-    <option value="{{category.name}}">{{category.name}}</option>
-    {% endif %}
-    {% endfor %}
-  </select>
-  <button type="submit">Buscar</button>
+  <div class="input-group nav-options">
+    <input type="text" name="product" class="form-control" placeholder="Buscar productos..." value="{{ request.GET.product }}">
+    <!-- Category filter implementation -->
+    <select name="category" class="form-select" id="category">
+      <option value="">Todas</option>
+      {% for category in categories %}
+      {% if selected_category == category.name %}
+      <option value="{{category.name}}" selected>{{category.name}}</option>
+      {% else %}
+      <option value="{{category.name}}">{{category.name}}</option>
+      {% endif %}
+      {% endfor %}
+    </select>
+    <button class="btn btn-primary" type="submit">Buscar</button>
+  </div>
 </form>
 <div class="products-container">
 {% for product in products %}
-  <div class="card" style="width: 18rem; margin: 2rem;">
+  <div class="card" style="width: 18rem;">
     {% if product.image %}
     <img src="{{product.image.url}}" class="card-img-top" alt="...">
     {% else %}
