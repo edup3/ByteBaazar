@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,16 +17,19 @@
             <img src="{% static 'store/ByteBaazar-logo.png' %}" alt="Logo" height="50" class="d-inline-block">
             ByteBaazar
           </a>
+          {% get_current_language as LANGUAGE_CODE %}
+          <p>
+            {{LANGUAGE_CODE}}</p>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}">{% translate "Home" %}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'store' %}">Store</a>
+                <a class="nav-link" href="{% url 'store' %}">{% translate "Store" %}</a>
               </li>
             </ul>
             {% if user.is_authenticated %}
@@ -38,7 +42,7 @@
                   <li><a class="dropdown-item" href="#">
                     <form action="{% url 'logout' %}" method="post">
                       {% csrf_token %}
-                      <button type="submit" class="nav-link">logout</button>
+                      <button type="submit" class="nav-link">{% translate "logout" %}</button>
                     </form>
                   </a></li>
                 </ul>
@@ -46,8 +50,8 @@
 
 
             {% else %}
-              <a class="nav-link m-2" href="{% url 'register' %}">Register</a>
-              <a class="nav-link m-2" href="{% url 'login' %}">Login</a>
+              <a class="nav-link m-2" href="{% url 'register' %}">{% translate "Register" %}</a>
+              <a class="nav-link m-2" href="{% url 'login' %}">{% translate "Login" %}</a>
             {% endif %}
               
           </div>

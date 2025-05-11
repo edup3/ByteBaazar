@@ -1,4 +1,5 @@
 {% extends 'store/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}
 Store
@@ -10,7 +11,7 @@ Store
     <input type="text" name="product" class="form-control" placeholder="Buscar productos..." value="{{ request.GET.product }}">
     <!-- Category filter implementation -->
     <select name="category" class="form-select" id="category">
-      <option value="">Todas</option>
+      <option value="">{% translate "All" %}</option>
       {% for category in categories %}
       {% if selected_category == category.name %}
       <option value="{{category.name}}" selected>{{category.name}}</option>
@@ -19,7 +20,7 @@ Store
       {% endif %}
       {% endfor %}
     </select>
-    <button class="btn btn-primary" type="submit">Buscar</button>
+    <button class="btn btn-primary" type="submit">{% translate "Search" %}</button>
   </div>
 </form>
 <div class="products-container">
@@ -33,7 +34,7 @@ Store
     <div class="card-body">
       <h5 class="card-title">{{product.name}}</h5>
       <p class="card-text">{{product.description}}</p>
-      <a href="{% url 'product' product.id %}" class="btn btn-primary">View Product</a>
+      <a href="{% url 'product' product.id %}" class="btn btn-primary">{% translate "View Product" %}</a>
     </div>
   </div>
   {% endfor %}
