@@ -2,10 +2,10 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'store/form.css' %}">
-<h2>Add a review</h2>
+<h2>{% translate "Add a review" %}</h2>
 <form method="POST">
     {% csrf_token %}
     {{ form }}
-    <button type="submit">Mandar</button>
+    <button type="submit">{% translate "Send" %}</button>
     </form>
 {% endblock %}

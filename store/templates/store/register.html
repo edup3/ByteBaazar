@@ -1,15 +1,15 @@
 {% extends 'store/base.html' %}
-
+{% load i18n %}
 {% load static %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'store/form.css' %}">
-<h2>Register User</h2>
+<h2>{% trans "Register User" %}</h2>
 <form method="POST" action="{% url 'register' %}">
     <div class="form-container"> 
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Mandar</button>
+        <button type="submit">{% translate "Send" %}</button>
     </div>
     </form>
 {% endblock %}

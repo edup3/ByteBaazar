@@ -1,6 +1,8 @@
 from django.urls import path, include
-from .views import HomePageView, StorePageView, RegisterCustomerView, ProductPageView, LoginCustomerView, LogoutCustomerView, CreateReviewView, CartView
 from . import views
+from .views import HomePageView, StorePageView, RegisterCustomerView, ProductPageView, LoginCustomerView, LogoutCustomerView, CreateReviewView, CartView
+from django.views.i18n import set_language
+
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('store/', StorePageView.as_view(), name='store'),
@@ -12,4 +14,6 @@ urlpatterns = [
          CreateReviewView.as_view(), name='add_review'),
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', CartView.as_view(), name='cart'),
+    path('set-language/', set_language, name='set_language'),
+
 ]

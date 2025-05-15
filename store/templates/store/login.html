@@ -1,4 +1,5 @@
 {% extends 'store/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <h2>Login User</h2>
@@ -6,6 +7,6 @@
     <link rel="stylesheet" href="{% static 'store/form.css' %}">
     {% csrf_token %}
     {{ form }}
-    <button type="submit">Mandar</button>
+    <button type="submit">{% translate "Send" %}</button>
     </form>
 {% endblock %}

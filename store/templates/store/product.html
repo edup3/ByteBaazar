@@ -1,5 +1,6 @@
 <!-- Eduardo Piñeros -->
 {% extends 'store/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %} 
 {{product.name}}
@@ -15,10 +16,11 @@
         <div class="card-body product-body">
           <h5 class="card-title">{{product.name}}</h5>
           <!-- Average Rating Implementation-->
-          <p>Rating: {{average_rating}}</p>
+          {% translate "Rating: " as rating_text %}
+          <p>{{rating_text}}{{average_rating}}</p>
           <h6 class="card-subtitle">${{product.price}}</h6>
           <p class="card-text">{{product.description}}</p>
-          <h6 class="card-subtitle">Reviews:</h6>
+          <h6 class="card-subtitle">{% translate "Reviews:" %}</h6>
           <ul class="list-group list-group-flush reviews">
           {% for review in product.reviews.all %}
             <li class="list-group-item">
@@ -26,17 +28,17 @@
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{review.customer.username}}</h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">Rating: {{review.rating}}</h6>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">{{rating_text}}{{review.rating}}</h6>
                       <p class="card-text comment">{{review.comment}}</p>
-                      <p class="mb-2 text-body-secondary">Posted: {{review.created_at}}</p>
+                      <p class="mb-2 text-body-secondary">{% translate "Posted: "%}{{review.created_at}}</p>
                     </div>
                   </div>
             </li>
             {% endfor %}
         </ul>
         <div class="btn-bar">    
-            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Agregar al carrito</a>
-            <a href="{% url 'add_review' product.id %}" class="btn btn-secondary" id="cart-btn">Dejar una review</a>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary" id="cart-btn">{% translate "Add to Cart" %}</a>
+            <a href="{% url 'add_review' product.id %}" class="btn btn-secondary" id="cart-btn">{% translate "Add a review" %}</a>
         </div>
         </div>
       </div>
