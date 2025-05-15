@@ -2,4 +2,20 @@
 {% load i18n %}
 {% block content %}
 <h2>{% translate "Welcome to ByteBaazar" %}</h2>
+<h2>📰 Noticias tecnológicas</h2>
+{% if news %}
+    <ul>
+        {% for item in news %}
+            <li>
+                <a href="{{ item.link }}" target="_blank">
+                    {{ item.title }}
+                </a>
+                <br>
+                <small>{{ item.pubDate }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay noticias disponibles.</p>
+{% endif %}
 {% endblock %}

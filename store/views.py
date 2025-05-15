@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.urls import reverse
 from django.db import models
-
+from django.http import JsonResponse
+import requests
 # Create your views here.
 
 
@@ -36,6 +37,20 @@ class LogoutCustomerView(LogoutView):
 class HomePageView(TemplateView):
     template_name = 'store/index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        api_key = 'pub_8735455c9bd5909dd7fa801dd2331956af047'
+        url = f'https://newsdata.io/api/1/news?apikey={api_key}&category=technology&language=en'
+
+        try:
+            response = requests.get(url)
+            data = response.json()
+            context['news'] = data.get('results', [])
+        except Exception as e:
+            print(f"Error al consumir la API de noticias: {e}")
+            context['news'] = []
+
+        return context
 
 class StorePageView(LoginRequiredMixin, ListView):
     login_url = '/login/'
@@ -128,3 +143,22 @@ def add_to_cart(request, product_id):
 
     # Redirigir a la misma página del producto
     return redirect('product', pk=product.id)
+
+def products_in_stock(request):
+    products = Product.objects.filter(stock__gt=0)
+
+    data = []
+    for product in products:
+        product_url = request.build_absolute_uri(
+            reverse('product', args=[product.pk])
+        )
+        data.append({
+            'id': product.pk,
+            'name': product.name,
+            'price': float(product.price),
+            'stock': product.stock,
+            'category': product.category.name if product.category else None,
+            'url': product_url,
+        })
+
+    return JsonResponse(data, safe=False)
