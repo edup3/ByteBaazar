@@ -15,5 +15,5 @@ urlpatterns = [
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', CartView.as_view(), name='cart'),
     path('set-language/', set_language, name='set_language'),
-
+    path('api/products-in-stock/', views.products_in_stock, name='products_in_stock'),
 ]
