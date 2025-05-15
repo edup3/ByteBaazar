@@ -1,8 +1,20 @@
+:root{
+    --baazar-blue : #30499cd0;
+    --baazar-blue2 :#86b1fbd9;
+    --baazar-yellow : #ffc107a3;
+    --baazar-red : #D9534F;
+    --baazar-green: #2abe4c;
+    --baazar-khaki: #CDB599;
+    --baazar-beige: #F8F9FA;
+    --baazar-pink: #A08689;
+    --baazar-gray: #F1F1F1;
+}
 html{
     height: 100%;
 }
 body{
     height: 100%;
+    background-color: var(--baazar-gray);
 }
 .product-container{
     width: 70%;
@@ -16,13 +28,22 @@ body{
     justify-self: center;
     display: flex;
     flex-wrap: wrap;
+    gap: 1.5rem;
 }
 .product-card{
     width: 100%;
 }
 .card-body{
-    flex: none;
+    border-radius: 10px;
 }
+
+.btn-primary {
+    background-color: var(--baazar-yellow);
+    border: none;
+    color: black;
+
+}
+
 .card-subtitle{
     color: var(--bs-tertiary-color);
 }
@@ -45,4 +66,48 @@ body{
     display: flex;
     justify-content: center;
     gap: 50px;
+}
+.navbar{
+    background-color: var(--baazar-blue);
+    color: var(--baazar-yellow);
+}
+.nav-options{
+    width: 40%;
+    margin: 1.5rem;
+}
+.Logo{
+    object-fit: contain;
+}
+#lang{
+    max-width: revert;
+    margin: revert;
+    padding: revert;
+    border-radius: revert;
+    box-shadow: revert;
+    background: revert;
+    
+}
+#lang button{
+    
+    width: revert;
+    padding: revert;
+    background: revert;
+    color: revert;
+    border: revert;
+    border-radius: revert;
+    border-radius: 0px 25px 25px 0px;
+    font-size: revert;
+    cursor: revert;
+    transition: background 0.3s ease-in-out;
+    margin-left: 0px;
+}
+#lang input, #lang select, #lang textarea {
+    width: revert !important;
+    padding: revert !important;
+    margin-bottom: revert !important;
+    border: revert !important;
+    border-radius: revert !important;
+    font-size: revert !important;
+    transition: revert!important;
+    margin-right: 0px;
 }

@@ -82,7 +82,6 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
     form_class = ReviewForm
 
     def form_valid(self, form):
-        print(self.kwargs)
         form.instance.customer = self.request.user
         form.instance.product = Product.objects.get(
             pk=self.kwargs['product_pk'])
