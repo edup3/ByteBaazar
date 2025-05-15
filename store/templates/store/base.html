@@ -24,6 +24,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'store' %}">Store</a>
               </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cart' %}">Shopping Cart</a>
+              </li>
+              {% endif %}
             </ul>
             {% if user.is_authenticated %}
 

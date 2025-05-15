@@ -35,7 +35,7 @@
             {% endfor %}
         </ul>
         <div class="btn-bar">    
-            <a href="#" class="btn btn-primary" id="cart-btn">Agregar al carrito</a>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Agregar al carrito</a>
             <a href="{% url 'add_review' product.id %}" class="btn btn-secondary" id="cart-btn">Dejar una review</a>
         </div>
         </div>

@@ -67,3 +67,4 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity}x {self.product.name} (Orden {self.order.id})"
+
