@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import HomePageView, StorePageView, RegisterCustomerView, ProductPageView, LoginCustomerView, LogoutCustomerView, CreateReviewView, CartView
+from .views import HomePageView, StorePageView, RegisterCustomerView, ProductPageView, LoginCustomerView, LogoutCustomerView, CreateReviewView, CartView, ProductReportView
 from django.views.i18n import set_language
 
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
     path('cart/', CartView.as_view(), name='cart'),
     path('set-language/', set_language, name='set_language'),
     path('api/products-in-stock/', views.products_in_stock, name='products_in_stock'),
+    path('report/<str:format>/', ProductReportView.as_view(), name='product_report'),
 ]
