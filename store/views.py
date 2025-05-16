@@ -14,6 +14,11 @@ from django.urls import reverse
 from django.db import models
 from django.http import JsonResponse
 import requests
+from django.views import View
+from django.shortcuts import get_list_or_404
+from .services.pdf_report import PDFReportGenerator
+from .services.excel_report import ExcelReportGenerator
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -162,3 +167,19 @@ def products_in_stock(request):
         })
 
     return JsonResponse(data, safe=False)
+
+class ProductReportView(View):
+    def get(self, request, format):
+        products = Product.objects.all()
+        if format == "pdf":
+            generator = PDFReportGenerator()
+            response = generator.generate(products)
+            response['Content-Disposition'] = 'attachment; filename="products_report.pdf"'
+            return response
+        elif format == "excel":
+            generator = ExcelReportGenerator()
+            response = generator.generate(products)
+            response['Content-Disposition'] = 'attachment; filename="products_report.xlsx"'
+            return response
+        else:
+            return HttpResponse("Formato no soportado", status=400)
